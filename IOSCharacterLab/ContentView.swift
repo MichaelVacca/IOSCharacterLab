@@ -1,21 +1,38 @@
-//
-//  ContentView.swift
-//  IOSCharacterLab
-//
-//  Created by macuser on 2023-11-08.
-//
+
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = StarWars()
+    
+    private let adaptiveColumns = [
+        GridItem(.adaptive(minimum: 150))
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: adaptiveColumns, spacing: 10) {
+                    ForEach(viewModel.filteredcharacter) { character in
+                        NavigationLink(destination: CharacterDetailvIEW(character: character)) {
+                            CharacterView(character: character)
+                        }
+                        
+                    }
+                }
+                .animation(.easeIn(duration: 0.3), value: viewModel.filteredcharacter.count)
+                .navigationTitle("Abdurs Character Dex")
+                .navigationBarTitleDisplayMode(.inline)
+            }
+            .searchable(text: $viewModel.searchText)
+         
         }
-        .padding()
+        .environmentObject(viewModel)
+      
+       
+      
+  
     }
 }
 
@@ -24,3 +41,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
