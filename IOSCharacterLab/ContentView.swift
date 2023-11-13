@@ -15,14 +15,14 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: adaptiveColumns, spacing: 10) {
                     ForEach(viewModel.filteredcharacter) { character in
-                        NavigationLink(destination: CharacterDetailvIEW(character: character)) {
+                        NavigationLink(destination: CharacterDetailView(character: character)) {
                             CharacterView(character: character)
                         }
                         
                     }
                 }
                 .animation(.easeIn(duration: 0.3), value: viewModel.filteredcharacter.count)
-                .navigationTitle("Abdurs Character Dex")
+                .navigationTitle("Michaels Character Dex")
                 .navigationBarTitleDisplayMode(.inline)
             }
             .searchable(text: $viewModel.searchText)

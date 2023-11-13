@@ -1,14 +1,8 @@
-//
-//  RickAndMorty.swift
-//  RickAndMortyCharacterApp
-//
-//  Created by Abdur Siddiqui on 2023-11-02.
-//
 
 import Foundation
 
 final class StarWars: ObservableObject {
-    private let characterService = RickAndMortyAcessService()
+    private let characterService = StarWarsAccessService()
     @Published var charcaterDetails: CharcterDetailsInfo?
     @Published var searchText = ""
     
@@ -44,7 +38,8 @@ final class StarWars: ObservableObject {
     func getDetails(character: StarWarsModel) {
         let id = getCharacterId(character: character)
         
-        charcaterDetails = CharcterDetailsInfo(id: 0,name: "", status: "", species: "", type: "", gender: "" )
+        charcaterDetails = CharcterDetailsInfo(id: 0, name: "", species: "", gender: "", image: "")//, masters: [])
+
         characterService.getDetailedCharacter(id: id) { data in
             DispatchQueue.main.async {
                 self.charcaterDetails = data

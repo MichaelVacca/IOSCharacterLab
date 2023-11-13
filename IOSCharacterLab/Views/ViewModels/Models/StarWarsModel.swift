@@ -1,16 +1,18 @@
 import Foundation
 
 struct StarWarsModel: Codable, Identifiable, Equatable {
-    let id = UUID()
-    let name: String
-    let url: String
-    
-    enum CodingKeys:  String, CodingKey {
-        case name
-        case url
+    var id: Int
+    var name: String
+    var species: String
+    var gender: String
+    var image: String
+    //var masters: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, species, gender, image//, image, masters
     }
-    
-    //https://akabab.github.io/starwars-api/api/all.json
-    static var sampleCharacter = StarWarsModel(name: "Rick Sanchez", url: "https://rickandmortyapi.com/api/character/1")
-    
+
+    // Sample for testing
+    static let sampleCharacter = StarWarsModel(id: 1, name: "Luke Skywalker", species: "human", gender: "male", image: "https://example.com/image.jpg")//, masters: ["Obi-Wan Kenobi", "Yoda"])
 }
+

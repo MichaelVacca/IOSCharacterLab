@@ -7,18 +7,18 @@
 
 import Foundation
 
-class RickAndMortyAcessService {
-    func getCharacters( completion:@escaping ([StarWarsModel]) -> ()){
-        Bundle.main.fetchData(url: "https://rickandmortyapi.com/api/character", model: CharcaterPage.self) {
-            data in
-            completion(data.results)
+class StarWarsAccessService{
+    func getCharacters(completion: @escaping ([StarWarsModel]) -> ()) {
+        let url = "https://akabab.github.io/starwars-api/api/all.json"
+        Bundle.main.fetchData(url: url, model: [StarWarsModel].self) { data in
+            completion(data)
         } failure: { error in
             print(error)
         }
     }
     
     func getDetailedCharacter(id: Int, _ completion:@escaping (CharcterDetailsInfo) -> () ) {
-        Bundle.main.fetchData(url:  "https://rickandmortyapi.com/api/character/\(id)/"
+        Bundle.main.fetchData(url:  "https://akabab.github.io/starwars-api/api/id/\(id).json"
                               
                               ,model: CharcterDetailsInfo.self) {
             data in
@@ -27,4 +27,5 @@ class RickAndMortyAcessService {
             print(error)
         }
     }
+    
 }
